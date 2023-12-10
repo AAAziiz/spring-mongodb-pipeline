@@ -20,7 +20,8 @@ pipeline {
          stage('Build docker-compose  image'){
             steps{
                 script{
-                    sh 'docker-compose build'
+                    sh 'docker-compose -f docker-compose.yml build'
+                    sh 'docker tag aziz/springboot aziz/springboot:latest'
                 }
             }
         }
