@@ -16,6 +16,27 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
+
+         stage('Build docker image'){
+            steps{
+                script{
+                    sh 'docker build -t azziiz/application .'
+                }
+            }
+        }
+         stage('Push to docker hub'){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'doxker-token', variable: 'password')]) {
+
+                    sh 'docker login -u azziiz -p ${password} docker.io'
+    }                      
+                    sh 'docker push azziiz/devops-integration '
+                    
+                }
+            }
+        }
+    }
         
     }
-}
+
