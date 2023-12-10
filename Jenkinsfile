@@ -14,7 +14,7 @@ pipeline {
             steps{
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AAAziiz/mongo-spring-pipeline']])
                 sh 'mvn clean install'
-                sh 'docker build -t aziz/springboot .'
+                sh 'docker build -t azziiz/springboot .'
             }
         }
 
@@ -22,7 +22,7 @@ pipeline {
             steps{
                 script{
                     sh 'docker-compose -f docker-compose.yml build'
-                    sh 'docker tag aziz/springboot aziz/springboot:latest'
+                    sh 'docker tag azziiz/springboot azziiz/springboot:latest'
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
                         
                     sh 'docker login -u azziiz -p ${dockerhubpwd} docker.io'
     }                      
-                    sh 'docker push aziz/springboot:latest'
+                    sh 'docker push azziiz/springboot:latest'
                     
                 }
             }
