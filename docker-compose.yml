@@ -1,0 +1,26 @@
+version: '2'
+services:
+  app:
+    image: 'springbootapp'
+    build: .
+    container_name: 'applicationspringboot'
+    ports:
+      - 8090:8090
+    networks:
+      - network
+    depends_on:
+      - dbmongo
+
+  dbmongo:
+    image: mongo:latest
+    container_name: 'dbmongo'
+    ports:
+      - 27017:27017
+    networks:
+      - network
+    volumes:
+      - ~/db:/var/lib/mongodb/data
+
+networks:
+  network:
+    driver: bridge
