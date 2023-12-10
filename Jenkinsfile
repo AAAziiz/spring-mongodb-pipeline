@@ -14,10 +14,11 @@ pipeline {
             steps{
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AAAziiz/mongo-spring-pipeline']])
                 sh 'mvn clean install'
+                sh 'docker build -t aziz/springboot .'
             }
         }
 
-         stage('Build docker-compose  image'){
+         stage('Build docker-compose image'){
             steps{
                 script{
                     sh 'docker-compose -f docker-compose.yml build'
