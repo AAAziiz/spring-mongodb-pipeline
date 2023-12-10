@@ -27,9 +27,9 @@ pipeline {
          stage('Push to docker hub'){
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'devops-project-credentials')]) {
+                    withCredentials([string(credentialsId: 'docker-hub-cred', variable: 'dockerhubpwd')]) {
                         
-                    sh 'docker login -u azziiz -p ${devops-project-credentials} docker.io'
+                    sh 'docker login -u azziiz -p ${dockerhubpwd} docker.io'
     }                      
                     sh 'docker push azziiz/application '
                     
