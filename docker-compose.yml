@@ -3,7 +3,7 @@ version: "3.8"
 
 services:
   sb-app:
-    image: 'aziz/springboot'
+    image: 'azziiz/springboot'
     build: .
     container_name: 'applicationspringboot'
     ports:
