@@ -32,7 +32,7 @@ pipeline {
                         
                     sh 'docker login -u azziiz -p ${dockerhubpwd} docker.io'
     }                      
-                    sh 'docker-compose push'
+                    sh 'docker push aziz/springboot:latest'
                     
                 }
             }
