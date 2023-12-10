@@ -17,10 +17,10 @@ pipeline {
             }
         }
 
-         stage('Build docker image'){
+         stage('Build docker-compose  image'){
             steps{
                 script{
-                    sh 'docker build -t azziiz/application .'
+                    sh 'docker-compose build'
                 }
             }
         }
@@ -31,7 +31,7 @@ pipeline {
                         
                     sh 'docker login -u azziiz -p ${dockerhubpwd} docker.io'
     }                      
-                    sh 'docker push azziiz/application '
+                    sh 'docker-compose push'
                     
                 }
             }
