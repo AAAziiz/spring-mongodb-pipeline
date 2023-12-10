@@ -1,26 +1,27 @@
-version: '2'
+
+version: "3.8"
+
 services:
-  app:
-    image: 'springbootapp'
+  sb-app:
+    image: 'aziz/springboot'
     build: .
     container_name: 'applicationspringboot'
     ports:
-      - 8090:8090
+      - 9090:9090
     networks:
-      - network
+      - mynetwork
     depends_on:
       - dbmongo
 
   dbmongo:
     image: mongo:latest
-    container_name: 'dbmongo'
+    container_name: 'mongodb'
     ports:
       - 27017:27017
     networks:
-      - network
-    volumes:
-      - ~/db:/var/lib/mongodb/data
+      - mynetwork
+    
 
 networks:
-  network:
+  mynetwork:
     driver: bridge
