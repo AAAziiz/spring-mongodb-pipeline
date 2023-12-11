@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    tools{
+    tools{ 
         maven 'Maven 3'
       
     }
@@ -10,9 +10,9 @@ pipeline {
                 sh 'java -version'
             }
         }
-        stage('Build Maven'){
+        stage('Build Maven'){ 
             steps{
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AAAziiz/mongo-spring-pipeline']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AAAziiz/spring-mongodb-pipeline']])
                 sh 'mvn clean install'
                 sh 'docker build -t azziiz/springboot .'
             }
@@ -52,9 +52,9 @@ pipeline {
          stage('Push to docker hub'){
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'docker-hub-cred', variable: 'dockerhubpwd')]) {
+                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhub')]) {
                         
-                    sh 'docker login -u azziiz -p ${dockerhubpwd} docker.io'
+                    sh 'docker login -u azziiz -p ${dockerhub} docker.io'
     }                      
                     sh 'docker push azziiz/springboot:latest'
                     
