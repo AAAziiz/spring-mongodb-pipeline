@@ -10,7 +10,7 @@ pipeline {
                 sh 'java -version'
             }
         }
-        stage('Build Maven'){
+        stage('Build Maven'){ 
             steps{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AAAziiz/spring-mongodb-pipeline']])
                 sh 'mvn clean install'
