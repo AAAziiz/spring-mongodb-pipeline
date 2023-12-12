@@ -84,7 +84,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                   withKubeConfig([credentialsId: 'mykubeconfig']) {
+                   withKubeConfig([credentialsId: 'minikube kubeconfig']) {
                     sh 'minikube start'
                     sh 'minikube status'
                     //sh 'kubectl config use-context minikube' // Switch to Minikube context if needed
