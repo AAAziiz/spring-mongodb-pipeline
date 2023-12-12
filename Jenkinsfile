@@ -61,6 +61,18 @@ pipeline {
                 }
             }
         }
+         stage('Pull to deployement'){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhub')]) {
+                        
+                    sh 'docker login -u azziiz -p ${dockerhub} docker.io'
+    }                      
+                    sh 'docker pull azziiz/springboot:latest'
+                    
+                }
+            }
+        }
         
     }
         
