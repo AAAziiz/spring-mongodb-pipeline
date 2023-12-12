@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: spring-boot-k8s
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-k8s
+  template:
+    metadata:
+      labels:
+        app: spring-boot-k8s
+    spec:
+      containers:
+        - name: spring-boot-k8s
+          image: azziiz/springboot:latest
+          # Image that will be used to containers in the cluster
+          ports:
+            - containerPort: 9090
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              value: mongodb://mongodb/gte-db
+
+          imagePullPolicy: Always
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-k8s-loadbalancer
+spec:
+  selector:
+    app: spring-boot-k8s
+  ports:
+    - port: 9090
+      targePort: 9090
+  type: LoadBalancer
