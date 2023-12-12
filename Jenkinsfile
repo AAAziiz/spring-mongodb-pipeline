@@ -20,7 +20,7 @@ pipeline {
         stage("Sonarqube Analysis "){
                     steps{
                         withSonarQubeEnv('sonar-server') {
-                            sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Petshop \
+                            sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=student ''' \
                             -Dsonar.java.binaries=. \
                             -Dsonar.projectKey=student ''' 
                         }
