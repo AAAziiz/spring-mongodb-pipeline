@@ -38,7 +38,7 @@ pipeline {
                // }
                // stage ('Build war file'){
            // steps{
-                sh 'mvn clean install -DskipTests=true'
+              //  sh 'mvn clean install -DskipTests=true'
            // }
       //  }
        // stage("OWASP Dependency Check"){
