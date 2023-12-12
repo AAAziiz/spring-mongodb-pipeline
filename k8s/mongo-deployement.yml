@@ -4,7 +4,7 @@ metadata:
   name: mongo-deployement
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOnce 
   resources: 
     requests: 
       storage: 256Mi
