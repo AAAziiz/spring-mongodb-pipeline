@@ -33,13 +33,17 @@ pipeline {
                         }
                    }
                 }
-                stage("quality gate"){
-                            steps {
-                                script {
-                                  waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
-                                }
-                           }
-                        }
+                stage ('Build war file'){
+            steps{
+                sh 'mvn clean install -DskipTests=true'
+            }
+        }
+        stage("OWASP Dependency Check"){
+            steps{
+                dependencyCheck additionalArguments: '--scan ./ --format XML ', odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
 
          stage('Build docker-compose image'){
             steps{
