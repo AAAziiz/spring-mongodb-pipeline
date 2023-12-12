@@ -22,7 +22,7 @@ pipeline {
                         withSonarQubeEnv('sonar-server') {
                             sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Petshop \
                             -Dsonar.java.binaries=. \
-                            -Dsonar.projectKey=student '''
+                            -Dsonar.projectKey=student ''' 
                         }
                     }
                 }
