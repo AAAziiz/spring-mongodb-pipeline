@@ -4,7 +4,7 @@ pipeline {
         maven 'Maven 3'
       
     }
-    stages{
+    stages{ 
          stage('Check Java Version') {
             steps {
                 sh 'java -version'
