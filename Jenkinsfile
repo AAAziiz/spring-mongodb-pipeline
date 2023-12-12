@@ -17,15 +17,15 @@ pipeline {
                 sh 'docker build -t azziiz/springboot .'
             }
         }
-        stage("Sonarqube Analysis "){
-                    steps{
-                        withSonarQubeEnv('sonar-server') {
-                            sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=student ''' \
-                            -Dsonar.java.binaries=. \
-                            -Dsonar.projectKey=student ''' 
-                        }
-                    }
+         stage("Sonarqube Analysis "){
+            steps{
+                withSonarQubeEnv('sonar-server') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=student \
+                    -Dsonar.java.binaries=. \
+                    -Dsonar.projectKey=student '''
                 }
+            }
+        }
                 stage("quality gate"){
                     steps {
                         script {
