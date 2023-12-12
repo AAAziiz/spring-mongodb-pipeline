@@ -4,6 +4,9 @@ pipeline {
         maven 'Maven 3'
       
     }
+    environment {
+        SCANNER_HOME=tool 'sonar-scanner'
+    }
     stages{ 
          stage('Check Java Version') {
             steps {
