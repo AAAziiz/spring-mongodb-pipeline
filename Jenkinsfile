@@ -17,7 +17,7 @@ pipeline {
             steps{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AAAziiz/spring-mongodb-pipeline']])
                 sh 'mvn clean install'
-                sh 'docker build -t azziiz/springboot .'
+                sh 'docker-compose -f docker-compose.yml build -t azziiz/springboot .'
             }
         }
          stage("Sonarqube Analysis "){ 
@@ -51,7 +51,7 @@ pipeline {
          stage('Build docker-compose image'){
             steps{
                 script{
-                    sh 'docker -f docker-compose.yml build'
+                    sh 'docker-compose -f docker-compose.yml build -t azziiz/springboot .'
                     sh 'docker tag azziiz/springboot azziiz/springboot:latest'
                 }
             }
