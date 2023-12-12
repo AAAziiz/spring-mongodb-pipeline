@@ -73,6 +73,26 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                   withKubeConfig([credentialsId: 'kubernetes']) {
+                    sh 'kubectl config use-context minikube' // Switch to Minikube context if needed
+                    sh 'kubectl apply -f ./k8s/mongo-deployement.yml'
+                    sh 'kubectl apply -f ./k8s/spring-deployement.yml'
+                }
+            }
+        }
+        }
+         post {
+        success {
+            echo 'Deployment to Kubernetes and post-deployment checks succeeded!'
+        }
+
+        failure {
+            echo 'Deployment to Kubernetes or post-deployment checks failed!'
+        }
+    }
         
     }
         
