@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools{ 
-        maven 'Maven 3'
+        maven 'Maven 3' 
       
     }
     //environment {
@@ -11,6 +11,7 @@ pipeline {
          stage('Check Java Version') {
             steps {
                 sh 'java -version'
+                echo 'java version is'
             }
         }
         stage('Build Maven'){ 
