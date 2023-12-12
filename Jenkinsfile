@@ -96,7 +96,7 @@ pipeline {
          
         
     }
-    //post {
+   // post {
       //  success {
         //    echo 'Deployment to Kubernetes and post-deployment checks succeeded!'
         //}
@@ -104,7 +104,7 @@ pipeline {
        // failure {
        //     echo 'Deployment to Kubernetes or post-deployment checks failed!'
         //}
-    }
+   // }
         
     }
 
