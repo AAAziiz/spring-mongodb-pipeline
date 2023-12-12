@@ -77,7 +77,9 @@ pipeline {
             steps {
                 script {
                    withKubeConfig([credentialsId: 'mykubeconfig']) {
-                    sh 'kubectl config use-context minikube' // Switch to Minikube context if needed
+                    sh 'minikube start'
+                    sh 'minikube status'
+                    //sh 'kubectl config use-context minikube' // Switch to Minikube context if needed
                     sh 'kubectl apply -f ./k8s/mongo-deployement.yml'
                     sh 'kubectl apply -f ./k8s/spring-deployement.yml'
                 }
