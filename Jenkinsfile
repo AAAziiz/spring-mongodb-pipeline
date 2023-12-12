@@ -4,9 +4,9 @@ pipeline {
         maven 'Maven 3'
       
     }
-    environment {
-        SCANNER_HOME=tool 'sonar-scanner'
-    }
+    //environment {
+        //SCANNER_HOME=tool 'sonar-scanner'
+   // }
     stages{ 
          stage('Check Java Version') {
             steps {
@@ -17,41 +17,41 @@ pipeline {
             steps{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AAAziiz/spring-mongodb-pipeline']])
                 sh 'mvn clean install'
-                sh 'docker-compose -f docker-compose.yml build -t azziiz/springboot .'
+                sh 'docker  build -t azziiz/springboot .'
             }
         }
-         stage("Sonarqube Analysis "){ 
-                    steps{
-                        withSonarQubeEnv('sonar-server') {
-                            sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=student \
-                            -Dsonar.java.binaries=. \
-                            -Dsonar.projectKey=student '''
-                        }
-                    }
-                }
-                stage("quality gate"){
-                    steps {
-                        script {
-                          waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
-                        }
-                   }
-                }
-                stage ('Build war file'){
-            steps{
+       //  stage("Sonarqube Analysis "){ 
+                   // steps{
+                     //   withSonarQubeEnv('sonar-server') {
+                          //  sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=student \
+                           // -Dsonar.java.binaries=. \
+                          //  -Dsonar.projectKey=student '''
+                      //  }
+                   // }
+               // }
+               // stage("quality gate"){
+                  //  steps {
+                       // script {
+                         // waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
+                       // }
+                  // }
+               // }
+               // stage ('Build war file'){
+           // steps{
                 sh 'mvn clean install -DskipTests=true'
-            }
-        }
-        stage("OWASP Dependency Check"){
-            steps{
-                dependencyCheck additionalArguments: '--scan ./ --format XML ', odcInstallation: 'DP-Check'
+           // }
+      //  }
+       // stage("OWASP Dependency Check"){
+            //steps{
+             //   dependencyCheck additionalArguments: '--scan ./ --format XML ', odcInstallation: 'DP-Check'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
+           // }
+       // }
 
          stage('Build docker-compose image'){
             steps{
                 script{
-                    sh 'docker-compose -f docker-compose.yml build -t azziiz/springboot .'
+                    sh 'docker  build -t azziiz/springboot .'
                     sh 'docker tag azziiz/springboot azziiz/springboot:latest'
                 }
             }
@@ -96,14 +96,14 @@ pipeline {
          
         
     }
-    post {
-        success {
-            echo 'Deployment to Kubernetes and post-deployment checks succeeded!'
-        }
+    //post {
+      //  success {
+        //    echo 'Deployment to Kubernetes and post-deployment checks succeeded!'
+        //}
 
-        failure {
-            echo 'Deployment to Kubernetes or post-deployment checks failed!'
-        }
+       // failure {
+       //     echo 'Deployment to Kubernetes or post-deployment checks failed!'
+        //}
     }
         
     }
