@@ -9,7 +9,7 @@ spec:
       app: spring-boot-k8s
   template:
     metadata:
-      labels:
+      labels: 
         app: spring-boot-k8s
     spec:
       containers:
