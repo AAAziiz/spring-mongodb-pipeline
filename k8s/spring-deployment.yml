@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment # Kubernetes resource kind we are creating
 metadata:
-  name: spring-boot-k8s-deployment
+  name: spring-mongo-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: spring-boot-k8s
+      app: spring-mongo
   template:
     metadata:
       labels: 
-        app: spring-boot-k8s
+        app: spring-mongo
     spec:
       containers:
-        - name: spring-boot-k8s
+        - name: spring-mong
           image: azziiz/springboot:latest
           # Image that will be used to containers in the cluster
           ports:
@@ -31,7 +31,7 @@ metadata:
   name: spring-boot-k8s-loadbalancer
 spec:
   selector:
-    app: spring-boot-k8s
+    app: spring-mong
   ports:
     - port: 9090
       targetPort: 9090
