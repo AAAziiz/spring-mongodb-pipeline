@@ -13,7 +13,7 @@ spec:
         app: spring-mongo
     spec:
       containers:
-        - name: spring-mong
+        - name: spring-mongo
           image: azziiz/springboot:latest
           # Image that will be used to containers in the cluster
           ports:
@@ -28,10 +28,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: spring-boot-k8s-loadbalancer
+  name: spring-mongo-service
 spec:
   selector:
-    app: spring-mong
+    app: spring-mongo
   ports:
     - port: 9090
       targetPort: 9090
