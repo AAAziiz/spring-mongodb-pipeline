@@ -88,7 +88,7 @@ pipeline {
                     //sh 'minikube start'
                     //sh 'kubectl config use-context minikube' // Switch to Minikube context if needed
                     sh ' minikube kubectl -- apply -f ./k8s/mongo-deployment.yml '
-                    sh ' minikube kubectl -- apply -f ./k8s/spring-deployment.yml '
+                    sh ' minikube kubectl -- apply -f ./k8s/springboot-mongodb.yml '
                 }
             }
         }
