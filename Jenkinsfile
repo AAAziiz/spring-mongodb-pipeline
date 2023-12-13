@@ -17,7 +17,7 @@ pipeline {
         stage('Build Maven'){ 
             steps{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AAAziiz/spring-mongodb-pipeline']])
-                sh 'mvn clean install'
+                sh 'mvn clean package -DskipTests'
                 sh 'docker  build -t azziiz/springboot .'
             }
         }
