@@ -8,7 +8,7 @@ pipeline {
         SCANNER_HOME=tool 'sonar-scanner' 
     }
     stages{ 
-         stage('Check Java Version') {
+         stage('Check Java Version') { 
             steps {
                 sh 'java -version'
                 echo 'java version is'
