@@ -1,36 +1,38 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment # Kubernetes resource kind we are creating
 metadata:
-  name: mongo-demo-deployment
+  name: spring-boot-k8s-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mongo-demo
+      app: spring-boot-k8s
   template:
     metadata:
       labels:
-        app: mongo-demo
+        app: spring-boot-k8s
     spec:
       containers:
-        - name: mongo-demo
+        - name: spring-boot-k8s
           image: azziiz/springboot:latest
+          # Image that will be used to containers in the cluster
           ports:
             - containerPort: 9090
           env:
             - name: SPRING_DATA_MONGODB_URI
               value: mongodb://mongodb/gte-db
+
           imagePullPolicy: Always
----
+
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb-demo-service  # Corrected service name here
+  name: spring-boot-svc
 spec:
   selector:
-    app: mongo-demo
+    app: spring-boot-k8s
   ports:
-    - protocol: TCP
-      port: 9090
-      targetPort: 9090
+    - port: 9090
+      targePort: 9090
   type: LoadBalancer
