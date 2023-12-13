@@ -34,5 +34,5 @@ spec:
     app: spring-boot-k8s
   ports:
     - port: 9090
-      targePort: 9090
+      targetPort: 9090
   type: LoadBalancer
