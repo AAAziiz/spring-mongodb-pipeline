@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: spring-mongo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-mongo
+  template:
+    metadata:
+      labels: 
+        app: spring-mongo
+    spec:
+      containers:
+        - name: spring-mongo
+          image: azziiz/springboot:latest
+          # Image that will be used to containers in the cluster
+          ports:
+            - containerPort: 9090
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              value: mongodb://mongodb/gte-db
+
+          imagePullPolicy: Always
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-mongo-service
+spec:
+  selector:
+    app: spring-mongo
+  ports:
+    - port: 9090
+      targetPort: 9090
+  type: LoadBalancer
