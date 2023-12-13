@@ -17,7 +17,7 @@ spec:
           image: azziiz/springboot:latest
           # Image that will be used to containers in the cluster
           ports:
-            - containerPort: 9090
+            - containerPort: 9090 
           env:
             - name: SPRING_DATA_MONGODB_URI
               value: mongodb://mongodb/gte-db
