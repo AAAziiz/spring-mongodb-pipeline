@@ -10,7 +10,7 @@ spec:
       storage: 1Gi
 ---
 apiVersion: v1
-kind: Service
+kind: Service  
 metadata:
   name: mongodb
 spec:
