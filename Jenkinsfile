@@ -69,42 +69,7 @@ pipeline {
                 }
             }
         }
-         stage('Pull to deployement'){
-            steps{
-                script{
-                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhub')]) {
-                        
-                    sh 'docker login -u azziiz -p ${dockerhub} docker.io'
-    }                      
-                    sh 'docker pull azziiz/springboot:latest'
-                    
-                }
-            }
-        }
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                   withKubeConfig([credentialsId: 'kubeconfig']) {
-                    //sh 'minikube start'
-                    //sh 'kubectl config use-context minikube' // Switch to Minikube context if needed
-                    sh ' minikube kubectl -- apply -f ./k8s/mongo-deployment.yml '
-                    sh ' minikube kubectl -- apply -f ./k8s/springboot-mongodb.yml '
-                }
-            }
-        }
-        }
-         
-        
-    }
-    post {
-        success {
-            echo 'Deployment to Kubernetes and post-deployment checks succeeded!'
-        }
-
-        failure {
-            echo 'Deployment to Kubernetes or post-deployment checks failed!'
-        }
-    }
+       
         
     }
 
